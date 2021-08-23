@@ -1,0 +1,63 @@
+ import Counter from "components/Counter";
+ import PostList from "components/PostList";
+ import MyButton from "components/UI/button/MyButton";
+ import MyInput from "components/UI/input/MyInput";
+ import React, { useRef, useState } from "react";
+ import "./App.css";
+
+ export default function App() {
+ const [value, setValue] = useState("Text in Input");
+   const [posts2, setPosts2] = useState([
+     { id: 1, title: "Python 1", body: "Description" },
+     { id: 2, title: "Python 2", body: "Description" },
+     { id: 3, title: "Python 3", body: "Description" },
+   ]);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+   const bodyInputRef = useRef();
+ const addNewPost = (e) => {
+   e.prevent.Default();
+   console.log(title);
+   console.log(bodyInputRef.current.value);
+ };
+   return (
+     <div className="App">
+       <form>
+    {/* Управляемый компонент */}
+    <MyInput
+      value={post.title}
+      onChange={(e) => setPost({ ...post, title: e.target.value })}
+      type="text"
+      placeholder="Name post"
+    />
+
+ {/* НЕ Управляемый компонент */ }
+         <MyInput
+           ref={bodyInputRef}
+           type="text"
+           placeholder="Description post"
+         />
+         <MyButton onClick={addNewPost}>Create post</MyButton>
+       <PostList posts={posts2} heading="List posts Python" />
+         <h1>{value}</h1>
+       <input
+         type="text"
+         value={value}
+         onChange={(event) => setValue(event.target.value)}
+       />
+       <Counter />
+       </form>
+         </div>
+   );
+ }
+ 
+ const addNewPost = (e) => {
+   e.prevent.Default();
+    const newPost = {
+      id: Date.now(),
+      title,
+      body,
+    };
+   setPosts([...posts, { ...post, id: Date.now() }]);
+   setPost({ title: "", body: "" });
+ };
