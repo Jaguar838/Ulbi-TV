@@ -10,15 +10,16 @@ export default function App() {
     { id: 3, title: "Javascript 3", body: "Description" },
   ]);
 
+  const removePost = (post) => {
+    setPosts(posts.filter((p) => p.id !== post.id));
+  };
   const createPost = (newPost) => {
     setPosts([...posts, newPost]);
   };
   return (
     <div className="App">
       <PostForm create={createPost} />
-      <PostList posts={posts} heading="List posts JS" />
+      <PostList remove={removePost} posts={posts} heading="List posts JS" />
     </div>
   );
 }
-
-
